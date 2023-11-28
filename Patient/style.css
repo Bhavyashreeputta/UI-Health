@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+body{
+    background-image: url(background-img.jpeg);
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-box {
+    width: 400px;
+    height: auto;
+    background-color: #ffffff60;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  
+p {
+  text-align: center;
+}
+
+.register-user a{
+  color: blue;
+}
+
+.register-user a:hover{
+  text-decoration: underline;
+}
+
+.nameInput, .elements-info, .addressInput, .addressInput2, .user-details{
+  display: flex;
+  justify-content: space-between;
+}
+
+.register-box {
+  width: 75%;
+  height: auto;
+  background-color: #ffffff60;
+  border: 1px solid #ccc;
+  margin-top: 30px;
+  padding: 20px 50px;
+  margin-bottom: 25px;
+}
+
+
+.input-element input, select{
+  width: 300px;
+}
+
+h1{
+  color: rgb(73, 71, 71);
+}
+
+.input-element .input-1 .SAdd1, .input-element .input-2 .SAdd2{
+  width: 500px;
+}

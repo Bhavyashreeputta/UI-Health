@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Admin</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" text="text/css" href="./dashboard.css">
+    <script src="https://kit.fontawesome.com/67cd3ea9da.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="navigation close">
+        <ul>
+            <li>
+                <div class="logo">
+                    <img src="./logo.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <a class="sub-btn">
+                    <span class="icon"><i class="fa-solid fa-user-doctor"></i></span>
+                    <span class="title">Nurse</span>
+                    <span class="icon"><i class="fa-solid fa-caret-down"></i></span>
+                </a>
+                <div class="sub-menu">
+                    <a href="./nurseRegister.php" class="sub-item">Register Nurse</a>
+                    <a href="./nurseview.php" class="sub-item">View</a>
+                </div>
+            </li>
+            <li>
+                <a href="./patientinfo.php">
+                    <span class="icon"><i class="fa-solid fa-hospital-user"></i></span>
+                    <span class="title">Patients</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sub-btn">
+                    <span class="icon"><i class="fa-solid fa-syringe"></i></span>
+                    <span class="title">Vaccine</span>
+                    <span class="icon"><i class="fa-solid fa-caret-down arrow-down"></i></span>
+                </a>
+                <div class="sub-menu">
+                    <a href="vaccine.php" class="sub-item">Add Vaccine</a>
+                    <a href="vaccineList.php" class="sub-item">Update Vaccine</a>
+                </div>
+            </li>
+            <li>
+                <a href="../home.html">
+                    <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                    <span class="title">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="header">
+            <div class="search-box">
+                    <input class="search-txt" type="text" name="search" value="" placeholder="Search">
+                    <button type="submit" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+<script>
+    let arrow = document.querySelectorAll(".fa-caret-down");
+    for (var i=0; i < arrow.length; i++){
+        arrow[i].addEventListener("click", (e)=>{    
+        let arrowParent = e.target.parentElement.parentElement.parentElement;
+        // console.log(arrowParent);
+        arrowParent.classList.toggle("showMenu");
+        })
+    }
+</script>
+</body>
+</html>

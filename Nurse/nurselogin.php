@@ -22,12 +22,13 @@ if(mysqli_num_rows($result) === 1){
     $row = mysqli_fetch_assoc($result);
     if($row['UserName'] === $uname && $row['Pass'] === $pass){
         echo "Logged In";
-        $_SESSION['Name'] = $row['Name'];
-        $_SESSION['UserID'] = $row['UserID'];
+        $_SESSION['UserName'] = $row['UserName'];
+        $_SESSION['Name'] = $row['FirstName'].' '. ' '.$row['LastName'];
+        $_SESSION['EmployeeID'] = $row['EmployeeID'];
         header("Location: nursedashboard.php");
     }
     else{
-        header("Location: nurselogin.php?error=Incorrect Username or Password");
+        header("Location: nurselogin.php?error=IncorrectUsername or Password");
         exit(0);
     }
 }

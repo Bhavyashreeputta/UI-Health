@@ -13,6 +13,8 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" text="text/css" href="dashboard.css">
+
+        <!-- funtion for wokring of dropdown menu -->
         <script>
             function menuToggle() {
                 const toggleMenu = document.querySelector('.menu')
@@ -22,9 +24,10 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
     </head>
 
     <body>
-        
         <div class="main">
-        <section>
+
+            <!-- Header of the page -->
+            <section>
                 <div class="header">
                     <div class="topbar">
                         <div class="logo">
@@ -32,15 +35,16 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
                         </div>
                         <div class="top-menu">
                             <ul>
-                                <li><a href="dashboard.php" class="active">Home</a></li>
+                                <li><a href="#" class="active">Home</a></li>
                                 <li><a href="./slots.php">Schedule</a></li>
-                                <li><a href="scheduleList.php">View</a></li>
+                                <li><a href="#">View</a></li>
                             </ul>
                         </div>
                         <div class="user" onclick="menuToggle();">
                             <img src="profileicon.png" id="photo">
                         </div>
-                        
+
+                        <!-- dropdown menu displayed when clicked on profileicon -->
                         <div class="menu">
                             <p>Signed in as<br>
                                 <a href="#">
@@ -83,37 +87,6 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div class="content">
-                    <h2 class="dash-title">Overview</h2>
-                    <div class="dashboard-cards">
-                        <div class="card-single">
-                            <div class="card-body">
-                                <span><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                                <div>
-                                    <h5>Total Appointments</h5>
-                                    <h4>18</h4>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <a href="">View all</a>
-                            </div>
-                        </div>
-                        <div class="card-single">
-                            <div class="card-body">
-                                <span><i class="fa fa-book" aria-hidden="true"></i></span>
-                                <div>
-                                    <h5>Pending Appointments</h5>
-                                    <h4>3</h4>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <a href="">View all</a>
-                            </div>
                         </div>
                     </div>
                 </div>

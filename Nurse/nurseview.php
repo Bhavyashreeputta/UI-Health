@@ -8,7 +8,6 @@
     <title>Admin</title>
 </head>
 <body>
-    <?php include './sidebar.html'; ?>
     <div class='main' id="main-content">
         <h2>Nurse Lists</h2>
         <?php

@@ -1,52 +1,128 @@
+<?php
+session_start();
+include '../config.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $scheduleID = $_POST["scheduleID"];
+
+    $deleteSql = "DELETE FROM vaccinationschedule WHERE V_Schedule_ID = '$scheduleID'";
+    if ($conn->query($deleteSql) === TRUE) {
+        $slotID = $_POST["slotID"];
+        $increaseSql = "UPDATE timeslot SET Capacity = Capacity + 1 WHERE SlotID = '$slotID'";
+        $conn->query($increaseSql);
+        $_SESSION['success'] = "Vaccination deleted successfully!";
+        header("Location: patientview.php");
+        exit();
+    } else {
+        $_SESSION['error'] = "Error cancelling vaccination. Please try again.";
+        header("Location: patientview.php");
+        exit();
+    }
+}
+$ssn = $_SESSION['SSN'];
+$sql = "SELECT * FROM vaccinationschedule where SSN = '$ssn'";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" text="text/css" href="./dashboard.css">
-    <title>Admin</title>
+<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <title>Patient</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" text="text/css" href="dashboard.css">
+
+        <script>
+            function menuToggle() {
+                const toggleMenu = document.querySelector('.menu')
+                toggleMenu.classList.toggle('active')
+            }
+        </script>
 </head>
 <body>
-    <?php include './sidebar.html'; ?>
-    <div class='main' id="main-content">
-        <h2>Nurse Lists</h2>
-        <?php
-        include '../config.php';
-        $sql = "SELECT * FROM patient ";
-        $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-        if(mysqli_num_rows($result) > 0){
-        ?>
-        <table cellpadding="5px">
-        <thead>
-        <th>Employee ID</th>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Update/Delete</th>
-        </thead>
-        <tbody>
-        <?php
-        while($row = mysqli_fetch_assoc($result)){
-        ?>
-        <tr>
-        <td><?php echo $row['SSN']; ?></td>
-        <td><?php echo $row['FName'].''.$row['MI'].''.$row['LName']; ?></td>
-        <td><?php echo $row['Phone']; ?></td>
-        <td class="links">
-        <a href='./updatepatient.php?update_no=<?php echo $row['SSN']; ?>' class="edit">Update</a>
-        <a href='delete.php?SSN=<?php echo $row['SSN']; ?>' class="delete">Delete</a>
-        </td>
-        </tr>
-        <?php } ?>
-        </tbody>
-        </table>
-        <?php }else{
-        echo "<h2>No Record Found</h2>";
-        }
-        mysqli_close($conn);
-        ?>
+    <div class="main">
+    <section>
+        <div class="header">
+            <div class="topbar">
+                        <div class="logo">
+                            <span class="ui-logo"><img src="logo.png" alt="Logo" width="180px"></span>
+                        </div>
+                        <div class="top-menu">
+                            <ul>
+                                <li><a href="./dashboard.php" class="active">Home</a></li>
+                                <li><a href="./patientschedule.php">Schedule</a></li>
+                                <li><a href="./patientview.php">View</a></li>
+                            </ul>
+                        </div>
+                        <div class="user" onclick="menuToggle();">
+                            <img src="profileicon.png" id="photo">
+                        </div>
+
+                <div class="menu">
+                            <p>Signed in as<br>
+                                <a href="#">
+                                    <span><?php echo $_SESSION['UserName']; ?></span>
+                                </a>
+                            </p>
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <span class="li-icon"><i class="fa fa-user-circle-o"
+                                                aria-hidden="true"></i></span>
+                                        <span class="li-title">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="li-icon"><i class="fa fa-pencil-square-o"
+                                                aria-hidden="true"></i></span>
+                                        <span class="li-title">Edit Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="li-icon"><i class="fa fa-plus-square"
+                                                aria-hidden="true"></i></span>
+                                        <span class="li-text">New Appointment</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="li-icon"><i class="fa fa-question-circle-o"
+                                                aria-hidden="true"></i></span>
+                                        <span class="li-title">Help</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="logout.php">
+                                        <span class="li-icon"><i class="fa fa-sign-in" aria-hidden="true"></i></span>
+                                        <span class="li-title">Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
+                </div>
+            </div>
         </div>
-        </div>    
+    </section>
+    <h2>Vaccination Schedule</h2>
+
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<input type="radio" name="scheduleID" value="' . $row["V_Schedule_ID"] . '">';
+                echo 'Schedule ID: ' . $row["V_Schedule_ID"] . ', Time Slot ID: ' . $row["SlotID"] . ', Dose No: ' . $row["DoseNo"] . ', Vaccine ID: ' . $row["VaccineID"] . '<br>';
+                echo '<input type="hidden" name="slotID" value="' . $row["SlotID"] . '">';
+
+            }
+            echo '<br><input type="submit" value="Cancel Schedule">';
+        } else {
+            echo "No vaccination schedules found.";
+        }
+        ?>
+    </form>
     </div>
 </body>
 </html>

@@ -34,16 +34,16 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
                         </div>
                         <div class="top-menu">
                             <ul>
-                                <li><a href="#" class="active">Home</a></li>
+                                <li><a href="nursedashboard.php" class="active">Home</a></li>
                                 <li><a href="./slots.php">Schedule</a></li>
-                                <li><a href="#">View</a></li>
+                                <li><a href="scheduleList.php">View</a></li>
+                                <li><a href="vaccine.php">Update Vaccine</a></li>
                             </ul>
                         </div>
                         <div class="user" onclick="menuToggle();">
                             <img src="profileicon.png" id="photo">
                         </div>
 
-                        <!-- dropdown menu displayed when clicked on profileicon -->
                         <div class="menu">
                             <p>Signed in as<br>
                                 <a href="#">
@@ -69,7 +69,7 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
                                     <a href="#">
                                         <span class="li-icon"><i class="fa fa-plus-square"
                                                 aria-hidden="true"></i></span>
-                                        <span class="li-text">New Appointment</span>
+                                        <span class="li-text">New Slot</span>
                                     </a>
                                 </li>
                                 <li>
@@ -96,11 +96,11 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
                 <?php
                 include '../config.php';
                 $empID = $_SESSION['EmployeeID'];
-                $sql = "SELECT `Date`, `Starttime`, `Endtime` FROM timeslot, nursescheduling WHERE timeslot.SlotID = nursescheduling.SlotID AND EmployeeID = '$empID'";
+                $sql = "SELECT `Date`, `Starttime`, `Endtime`, nursescheduling.SlotID AS Slotid FROM timeslot, nursescheduling WHERE timeslot.SlotID = nursescheduling.SlotID AND EmployeeID = '$empID'";
                 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
                 if(mysqli_num_rows($result) > 0){
                 ?>
-                <table cellpadding="5px" style="width: 35%; float: middle;">
+                <table cellpadding="5px" style="width: 50%;">
                     <thead>
                         <th>Date</th>
                         <th>Start Time</th>
@@ -115,7 +115,7 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
                     <td><?php echo $row['Starttime']; ?></td>
                     <td><?php echo $row['Endtime']; ?></td>
                     <td class="links" style="width: 15%;">
-                    <a href='delete.php?employee_id=<?php echo $row['EmployeeID']; ?>' class="delete">Delete</a>
+                    <a href='delete.php?slot_id=<?php echo $row['Slotid']; ?>' class="delete">Delete</a>
                     </td>
                     </tr>
                     <?php } ?>

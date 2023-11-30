@@ -19,13 +19,16 @@ if(isset($_POST['submit']))
     $uname = $_POST['username'];
     $pass = $_POST['password'];
 
-    $query = "INSERT INTO patient VALUES('$First_Name','$Middle_Name', '$Last_Name', '$SSN', '$Age', '$Gender', '$race', '$OClass', '$description', '$Phone_Number','$Sadd1','$uname', '$pass')";
+    $query = "INSERT INTO patient(FName, MI, LName, SSN, Age, Gender, Race, OccupationClass, MedicalHistoryDescription, Phone, Address, UserName, Passw) VALUES('$First_Name','$Middle_Name', '$Last_Name', '$SSN', '$Age', '$Gender', '$race', '$OClass', '$description', '$Phone_Number','$Sadd1','$uname', '$pass')";
     $query_run = mysqli_query($conn, $query);
      
 
     if($query_run)
     {
         $_SESSION['success'] = "Patient registered successfully!";
+        $_SESSION['Name'] = $_POST['fname'].''.$_POST['mi'].''.$_POST['lname'];
+        $_SESSION['SSN'] = $_POST['SSN'];
+        $_SESSION['UserName'] = $_POST['username'];
         header("Location: dashboard.php");
     }
     else
@@ -49,7 +52,7 @@ if(isset($_POST['submit']))
     <div class="container">
         <div class="register-box">
             <h1>Registration Forms</h1>
-            <forms action="registration.php" method="POST">
+            <form action="registration.php" method="POST">
                 <div class="input-element nameInput">
                     <div class="input-1">
                         <label for="fname">First Name</label>
@@ -152,7 +155,7 @@ if(isset($_POST['submit']))
             <div class = "submit-btn">
                 <input type="submit" class="submit" style="background-color: black; color:white;" name="submit"/>
             </div>
-        </forms>
+        </form>
             
         </div>
     </div>

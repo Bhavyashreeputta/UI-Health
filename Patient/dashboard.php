@@ -9,12 +9,11 @@ if(isset($_SESSION['SSN']) && isset($_SESSION['UserName'])){
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-        <title>Nurse</title>
+        <title>Patient</title>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" text="text/css" href="dashboard.css">
 
-        <!-- funtion for wokring of dropdown menu -->
         <script>
             function menuToggle() {
                 const toggleMenu = document.querySelector('.menu')
@@ -26,7 +25,6 @@ if(isset($_SESSION['SSN']) && isset($_SESSION['UserName'])){
     <body>
         <div class="main">
 
-            <!-- Header of the page -->
             <section>
                 <div class="header">
                     <div class="topbar">
@@ -37,14 +35,13 @@ if(isset($_SESSION['SSN']) && isset($_SESSION['UserName'])){
                             <ul>
                                 <li><a href="#" class="active">Home</a></li>
                                 <li><a href="./patientschedule.php">Schedule</a></li>
-                                <li><a href="#">View</a></li>
+                                <li><a href="./patientview.php">View</a></li>
                             </ul>
                         </div>
                         <div class="user" onclick="menuToggle();">
                             <img src="profileicon.png" id="photo">
                         </div>
 
-                        <!-- dropdown menu displayed when clicked on profileicon -->
                         <div class="menu">
                             <p>Signed in as<br>
                                 <a href="#">
@@ -92,7 +89,6 @@ if(isset($_SESSION['SSN']) && isset($_SESSION['UserName'])){
                 </div>
             </section>
 
-            <!-- Overview -->
             <section>
                 <div class="content">
                     <h2 class="dash-title">Overview</h2>

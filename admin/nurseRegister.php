@@ -27,7 +27,7 @@ if(isset($_POST['submit']))
     if($query_run)
     {
         $_SESSION['success'] = "Nurse registered successfully!";
-        header("Location: vaccine-info.php");
+        header("Location: nurseview.php");
     }
     else
     {

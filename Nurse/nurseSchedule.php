@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
 include '../config.php';
 
 $bookingDate = '';
@@ -47,9 +49,6 @@ $conn->close();
     <link rel="stylesheet" href="schedule.css">
 </head>
 <body>
-    <?php
-        include 'topbar.php';
-    ?>
     <div class="slot-booking-container">
         <h2>Slot Booking</h2>
         <form action="slotbooking.php" method="post">
@@ -84,3 +83,10 @@ $conn->close();
     </div>
 </body>
 </html>
+<?php
+}
+else{
+    header("Location: nurselogin.php");
+    exit();
+}
+?>

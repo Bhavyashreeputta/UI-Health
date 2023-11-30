@@ -13,7 +13,7 @@
         <div class="updateform">
             <h1>Vaccine Update</h1>
                 <div class="Vaccination-forms">
-                    <form action="updateVaccine.php" method="post" class="vaccine-form">
+                    <form action="updateVaccine.php" method="post" class="vaccine-form" style = "padding-top: 20px;">
                 <?php
 if(isset($_POST['update']))
 {
@@ -47,20 +47,24 @@ if(mysqli_num_rows($result) > 0) {
 while($row = mysqli_fetch_assoc($result)){
 ?> 
                 <div class="input-element">
-                    <label for="vaccine-name">Vaccine Name</label>
-                    <input type="text" id="vaccine-name" name="vaccine_name" value="<?php echo $row['Name']; ?>" required>
+                    <label for="vaccine-name">Vaccine Name : </label>
+                    <span><?php echo $row['Name']; ?></span>
+                    <!-- <input type="text" id="vaccine-name" name="vaccine_name" value="<?php echo $row['Name']; ?>" required> -->
                 </div>
                 <div  class="input-element">
-                    <label for="company-name">Company Name</label>
-                    <input type="text" id="company-name" name="company_name" value="<?php echo $row['CompanyName']; ?>" required>
+                    <label for="company-name">Company Name : </label>
+                    <span><?php echo $row['CompanyName']; ?></span>
+                    <!-- <input type="text" id="company-name" name="company_name" value="<?php echo $row['CompanyName']; ?>" required> -->
                 </div>
                 <div class="input-element">
-                    <label for="doses-required">Doses Required</label>
-                    <input type="number" id="doses-required" name="doses_required" value="<?php echo $row['Doses']; ?>" min="1" required>
+                    <label for="doses-required">Doses Required : </label>
+                    <span><?php echo $row['Doses']; ?></span>
+                    <!-- <input type="number" id="doses-required" name="doses_required" value="<?php echo $row['Doses']; ?>" min="1" required> -->
                 </div>
                 <div class="input-element">
-                    <label for="description">Description (optional)</label>
-                    <textarea id="description" name="description" rows="1" column="1"value="<?php echo $row['Description']; ?>"></textarea>
+                    <label for="description">Description (optional) : </label>
+                    <span><?php echo $row['Description']; ?></span>
+                    <!-- <textarea id="description" name="description" rows="1" column="1"value="<?php echo $row['Description']; ?>"></textarea> -->
                 </div>
                 <div class="input-element">
                     <label for="availability">Number of Doses Available</label>

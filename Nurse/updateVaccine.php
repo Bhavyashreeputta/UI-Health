@@ -1,7 +1,29 @@
-<?php 
+<?php
 session_start();
+include '../config.php';
 
-if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
+if (isset($_SESSION['Name']) && isset($_SESSION['UserName'])) {
+    if(isset($_POST['update']))
+    {
+        $Dose = $_POST['new_dose'];
+        $Date = $_POST['new_date'];
+
+        $query = "INSERT INTO vaccinerecord(`Dose`, `Date`) VALUES('$Dose','$Date')";
+        $query_run = mysqli_query($conn, $query);
+        
+
+        if($query_run)
+        {
+            $_SESSION['success'] = "Vaccine updated successfully!";
+            header("Location: vaccine.php");
+        }
+        else
+        {
+            $_SESSION['error'] = "There was an issue in updating the vaccie. Please try again.";
+            header("Location: updateVaccine.php");
+            exit();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +35,7 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" text="text/css" href="dashboard.css">
+        <link rel="stylesheet" text="text/css" href="schedele.css">
         <script>
             function menuToggle() {
                 const toggleMenu = document.querySelector('.menu')
@@ -57,7 +80,7 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="./nurseupdate.php?emp_no=<?php echo $_SESSION['EmployeeID']; ?>">
+                                    <a href="#">
                                         <span class="li-icon"><i class="fa fa-pencil-square-o"
                                                 aria-hidden="true"></i></span>
                                         <span class="li-title">Edit Profile</span>
@@ -88,37 +111,20 @@ if(isset($_SESSION['Name']) && isset($_SESSION['UserName'])){
                     </div>
                 </div>
             </section>
-            <section>
-                <div class="content">
-                    <h2 class="dash-title">Overview</h2>
-                    <div class="dashboard-cards">
-                        <div class="card-single">
-                            <div class="card-body">
-                                <span><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                                <div>
-                                    <h5>Total Appointments</h5>
-                                    <h4>18</h4>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <a href="">View all</a>
-                            </div>
-                        </div>
-                        <div class="card-single">
-                            <div class="card-body">
-                                <span><i class="fa fa-book" aria-hidden="true"></i></span>
-                                <div>
-                                    <h5>Pending Appointments</h5>
-                                    <h4>3</h4>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <a href="">View all</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <h2>Update Vaccination Information</h2>
+            <div class="update-form">
+                <form action="updateVaccine.php" method = "POST" style="align-item: center;">
+                    <label for="new_dose">Dose No</label>
+                    <input type="text" id="new_dose" name="new_dose" required>
+                    <br /> <br />
+                    <label for="new_date">Date</label>
+                    <input type="date" id="new_date" name="new_date" required>
+
+                    <input type="hidden" name="Employee_id" value="<?php echo $employeeId; ?>">
+                    <br /><br />
+                    <button type="submit" name="update">Update</button>
+                </form>
+            </div>
         </div>
     </body>
 </html>

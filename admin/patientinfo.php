@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
         <td>".$row["Gender"]."</td>
         <td>".$row["Race"]."</td>
         <td>".$row["OccupationClass"]."</td>
-        <td>".$row["MedicalHistory"]."</td>
+        <td>".$row["MedicalHistoryDescription"]."</td>
         <td>".$row["Phone"]."</td>
         <td>".$row["Address"]."</td></tr>";
     }
@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
 }
 
 // Fetch Vaccination Scheduling information
-$sql = "SELECT * FROM VaccinationScheduling";
+$sql = "SELECT * FROM vaccinationschedule";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
     echo "<table><tr><th>ScheduleID</th><th>PatientID</th><th>TimeSlotID</th><th>VaccineID</th><th>DoseNumber</th></tr>";
 
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["ScheduleID"]."</td><td>".$row["PatientID"]."</td><td>".$row["TimeSlotID"]."</td><td>".$row["VaccineID"]."</td><td>".$row["DoseNumber"]."</td></tr>";
+        echo "<tr><td>".$row["V_Schedule_ID"]."</td><td>".$row["SSN"]."</td><td>".$row["SlotID"]."</td><td>".$row["VaccineID"]."</td><td>".$row["DoseNo"]."</td></tr>";
     }
     echo "</table>";
 } else {
@@ -65,7 +65,7 @@ if ($result->num_rows > 0) {
 }
 
 // Fetch Vaccination Record information
-$sql = "SELECT * FROM VaccinationRecord";
+$sql = "SELECT * FROM vaccinerecord";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -73,7 +73,7 @@ if ($result->num_rows > 0) {
     echo "<table><tr><th>RecordID</th><th>PatientID</th><th>TimeSlotID</th><th>NurseID</th><th>VaccineID</th><th>DoseNumber</th><th>Vaccinedate</th></tr>";
 
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["RecordID"]."</td><td>".$row["PatientID"]."</td><td>".$row["TimeSlotID"]."</td><td>".$row["NurseID"]."</td><td>".$row["VaccineID"]."</td><td>".$row["DoseNumber"]."</td><td>".$row["Vaccinedate"]."</td></tr>";
+        echo "<tr><td>".$row["RecordNo"]."</td><td>".$row["SSN"]."</td><td>".$row["SlotID"]."</td><td>".$row["EmployeeID"]."</td><td>".$row["VaccineID"]."</td><td>".$row["Dose"]."</td><td>".$row["Date"]."</td></tr>";
     }
 
     echo "</table>";
